@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddEditTransactionView: View {
     @Environment(\.dismiss) private var dismiss
+    @ObservedObject private var settings = AppSettings.shared
 
     var existingTransaction: Transaction? = nil
     var onSave: (Transaction) -> Void
@@ -60,7 +61,7 @@ struct AddEditTransactionView: View {
                     TextField("Title (e.g. Groceries)", text: $title)
 
                     HStack {
-                        Text("$")
+                        Text(settings.selectedCurrency.symbol)
                             .font(.headline)
                             .foregroundColor(.secondary)
                         TextField("0.00", text: $amountString)
@@ -125,7 +126,8 @@ struct AddEditTransactionView: View {
                     date = txn.date
                     notes = txn.notes ?? ""
                 } else {
-                    category = TransactionCategory.categories(for: type).first?.name ?? "Food & Dining"
+                    type = settings.defaultTransactionType
+                    category = TransactionCategory.categories(for: settings.defaultTransactionType).first?.name ?? "Food & Dining"
                 }
             }
         }

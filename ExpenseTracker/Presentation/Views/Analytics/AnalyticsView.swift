@@ -12,6 +12,7 @@ import Charts
 struct AnalyticsView: View {
     @ObservedObject var viewModel: TransactionsViewModel
     @ObservedObject var dashboardViewModel: DashboardViewModel
+    @ObservedObject private var settings = AppSettings.shared
 
     @State private var selectedType: TransactionType = .expense
 

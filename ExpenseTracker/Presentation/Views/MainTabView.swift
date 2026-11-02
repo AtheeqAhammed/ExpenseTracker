@@ -19,6 +19,7 @@ enum AppTab: Hashable {
 struct MainTabView: View {
     @ObservedObject var viewModel: TransactionsViewModel
     @ObservedObject var dashboardViewModel: DashboardViewModel
+    @ObservedObject private var settings = AppSettings.shared
 
     @State private var selectedTab: AppTab = .dashboard
 

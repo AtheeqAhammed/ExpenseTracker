@@ -10,6 +10,8 @@ import SwiftUI
 
 struct SetBudgetSheet: View {
     @Environment(\.dismiss) private var dismiss
+    @ObservedObject private var settings = AppSettings.shared
+
     let existingBudget: MonthlyBudget?
     var onSave: (String, Decimal) -> Void
 
@@ -37,7 +39,7 @@ struct SetBudgetSheet: View {
                     .disabled(existingBudget != nil)
 
                     HStack {
-                        Text("$")
+                        Text(settings.selectedCurrency.symbol)
                             .font(.headline)
                             .foregroundColor(.secondary)
                         TextField("Monthly Limit (e.g. 500)", text: $limitString)

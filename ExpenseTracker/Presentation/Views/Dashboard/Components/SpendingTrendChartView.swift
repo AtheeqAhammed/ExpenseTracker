@@ -11,6 +11,7 @@ import Charts
 struct SpendingTrendChartView: View {
     let dataPoints: [DailySpendingPoint]
     @Binding var selectedDays: Int
+    var currencySymbol: String = CurrencyFormatter.currentSymbol
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
@@ -99,7 +100,7 @@ struct SpendingTrendChartView: View {
                             .foregroundStyle(Color.secondary.opacity(0.2))
                         AxisValueLabel {
                             if let val = value.as(Double.self) {
-                                Text("$\(Int(val))")
+                                Text("\(currencySymbol)\(Int(val))")
                                     .font(.caption2)
                                     .foregroundStyle(Color.secondary)
                             }

@@ -270,4 +270,21 @@ final class TransactionsViewModel: ObservableObject {
             return nil
         }
     }
+
+    /// Generates a JSON backup file containing all transactions.
+    func generateJSONExportURL() -> URL? {
+        let dtos = allTransactions.map { TransactionDTO(from: $0) }
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        encoder.dateEncodingStrategy = .iso8601
+        do {
+            let data = try encoder.encode(dtos)
+            let tempDir = FileManager.default.temporaryDirectory
+            let fileURL = tempDir.appendingPathComponent("ExpenseTracker_Backup_\(Int(Date().timeIntervalSince1970)).json")
+            try data.write(to: fileURL)
+            return fileURL
+        } catch {
+            return nil
+        }
+    }
 }

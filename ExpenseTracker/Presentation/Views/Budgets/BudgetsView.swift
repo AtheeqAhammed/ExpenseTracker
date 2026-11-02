@@ -11,6 +11,7 @@ import SwiftUI
 struct BudgetsView: View {
     @ObservedObject var viewModel: TransactionsViewModel
     @ObservedObject var dashboardViewModel: DashboardViewModel
+    @ObservedObject private var settings = AppSettings.shared
 
     @State private var showingAddBudget = false
     @State private var selectedBudgetForEdit: MonthlyBudget? = nil

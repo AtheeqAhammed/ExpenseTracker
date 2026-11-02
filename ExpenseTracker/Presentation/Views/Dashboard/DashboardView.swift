@@ -11,6 +11,7 @@ import SwiftUI
 struct DashboardView: View {
     @ObservedObject var viewModel: TransactionsViewModel
     @ObservedObject var dashboardViewModel: DashboardViewModel
+    @ObservedObject private var settings = AppSettings.shared
     var onSeeAllTapped: () -> Void
 
     @State private var showingAddSheet = false
@@ -40,7 +41,8 @@ struct DashboardView: View {
                     // Spending Trend Chart
                     SpendingTrendChartView(
                         dataPoints: trendData,
-                        selectedDays: $dashboardViewModel.selectedTrendDays
+                        selectedDays: $dashboardViewModel.selectedTrendDays,
+                        currencySymbol: settings.selectedCurrency.symbol
                     )
 
                     // Recent Transactions Section

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TransactionsListView: View {
     @ObservedObject var viewModel: TransactionsViewModel
+    @ObservedObject private var settings = AppSettings.shared
 
     @State private var showingAddSheet = false
     @State private var transactionToEdit: Transaction? = nil

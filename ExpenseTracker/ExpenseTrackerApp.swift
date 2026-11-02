@@ -20,6 +20,7 @@ struct ExpenseTrackerApp: App {
 
     @StateObject private var transactionsViewModel: TransactionsViewModel
     @StateObject private var dashboardViewModel: DashboardViewModel
+    @ObservedObject private var settings = AppSettings.shared
 
     init() {
         let schema = Schema([
@@ -76,6 +77,7 @@ struct ExpenseTrackerApp: App {
                 await transactionsViewModel.loadTransactions()
                 await dashboardViewModel.loadBudgets()
             }
+            .preferredColorScheme(settings.appearanceMode.colorScheme)
         }
         .modelContainer(container)
     }
